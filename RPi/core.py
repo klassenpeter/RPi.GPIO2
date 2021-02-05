@@ -56,8 +56,8 @@ I2C         = 42
 HARD_PWM    = 43
 
 # [API] Output modes
-LOW  = gpiod.Line.ACTIVE_LOW
-HIGH = gpiod.Line.ACTIVE_HIGH
+LOW  = gpiod.line.ACTIVE_LOW
+HIGH = gpiod.line.ACTIVE_HIGH
 
 _LINE_ACTIVE_STATE_COSNT_TO_FLAG = {
     LOW: gpiod.LINE_REQ_FLAG_ACTIVE_LOW,
@@ -72,15 +72,15 @@ def active_flag(const):
 
 # [API] Software pull up/pull down resistor modes
 # We map RPi.GPIO PUD modes to libgpiod PUD constants
-PUD_OFF     = gpiod.Line.BIAS_AS_IS
-PUD_UP      = gpiod.Line.BIAS_PULL_UP
-PUD_DOWN    = gpiod.Line.BIAS_PULL_DOWN
+PUD_OFF     = gpiod.line.BIAS_AS_IS
+PUD_UP      = gpiod.line.BIAS_PULL_UP
+PUD_DOWN    = gpiod.line.BIAS_PULL_DOWN
 
 # We extend RPi.GPIO with the ability to explicitly disable pull up/down behavior
-PUD_DISABLE = gpiod.Line.BIAS_DISABLE
+PUD_DISABLE = gpiod.line.BIAS_DISABLE
 
 # libgpiod uses distinct flag values for each line bias constant returned by
-# the gpiod.Line.bias() method. To simplify our translation, we map the latter
+# the gpiod.line.bias() method. To simplify our translation, we map the latter
 # to the former with the following dictionary
 _LINE_BIAS_CONST_TO_FLAG = {
     PUD_OFF:    0,  # This behavior is indicated with the default flag

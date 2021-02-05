@@ -60,7 +60,7 @@ LOW  = gpiod.line.ACTIVE_LOW
 HIGH = gpiod.line.ACTIVE_HIGH
 
 _LINE_ACTIVE_STATE_COSNT_TO_FLAG = {
-    LOW: gpiod.LINE_REQ_FLAG_ACTIVE_LOW,
+    LOW: gpiod.line_request.FLAG_ACTIVE_LOW,
     HIGH: 0,  # Active High is set by the default flag
 }
 
@@ -84,9 +84,9 @@ PUD_DISABLE = gpiod.line.BIAS_DISABLE
 # to the former with the following dictionary
 _LINE_BIAS_CONST_TO_FLAG = {
     PUD_OFF:    0,  # This behavior is indicated with the default flag
-    PUD_UP:     gpiod.LINE_REQ_FLAG_BIAS_PULL_UP,
-    PUD_DOWN:   gpiod.LINE_REQ_FLAG_BIAS_PULL_DOWN,
-    PUD_DISABLE: gpiod.LINE_REQ_FLAG_BIAS_DISABLE,
+    PUD_UP:     gpiod.line_request.FLAG_BIAS_PULL_UP,
+    PUD_DOWN:   gpiod.line_request.FLAG_BIAS_PULL_DOWN,
+    PUD_DISABLE: gpiod.line_request.FLAG_BIAS_DISABLE,
 }
 
 
@@ -97,14 +97,14 @@ def bias_flag(const):
 
 # Internal line modes
 _line_mode_none     = 0
-_line_mode_in       = gpiod.LINE_REQ_DIR_IN
-_line_mode_out      = gpiod.LINE_REQ_DIR_OUT
-_line_mode_falling  = gpiod.LINE_REQ_EV_FALLING_EDGE
-_line_mode_rising   = gpiod.LINE_REQ_EV_RISING_EDGE
-_line_mode_both     = gpiod.LINE_REQ_EV_BOTH_EDGES
+_line_mode_in       = gpiod.line_request.DIRECTION_INPUT
+_line_mode_out      = gpiod.line_request.DIRECTION_OUTPUT
+_line_mode_falling  = gpiod.line_request.EVENT_FALLING_EDGE
+_line_mode_rising   = gpiod.line_request.EVENT_RISING_EDGE
+_line_mode_both     = gpiod.line_request.EVENT_BOTH_EDGES
 # As of yet unused and unexposed
 # TODO investigate AS_IS kernel behavior
-_line_mode_as_is    = gpiod.LINE_REQ_DIR_AS_IS
+_line_mode_as_is    = gpiod.line_request.DIRECTION_AS_IS
 
 
 # [API] Line event types

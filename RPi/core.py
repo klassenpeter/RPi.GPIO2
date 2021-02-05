@@ -380,7 +380,7 @@ def chip_init():
 
     # This is hardcoded for now but that may change soon (or not)
     try:
-        _State.chip = gpiod.Chip("gpiochip0")
+        _State.chip = gpiod.chip("gpiochip0")
     except PermissionError:
         print("Unable to access /dev/gpiochip0. Are you sure you have permission?")
         sys.exit()

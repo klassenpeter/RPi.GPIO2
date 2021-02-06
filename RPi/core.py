@@ -418,7 +418,7 @@ def chip_close_if_open():
 
 def chip_get_num_lines():
     chip_init_if_needed()
-    return _State.chip.num_lines()
+    return _State.chip.num_lines
 
 
 def chip_destroy():
@@ -431,7 +431,7 @@ def chip_destroy():
 
 def line_get_unique_name(channel):
     chip_init_if_needed()
-    return str(_State.chip.name()) + "-" + str(channel)
+    return str(_State.chip.name) + "-" + str(channel)
 
 
 def line_set_mode(channel, mode, flags=0):
@@ -661,7 +661,7 @@ def line_do_poll(channel, bouncetime, timeout):
             break
         if line_event_wait(channel, bouncetime, timeout):
             callbacks = _State.lines[channel].callbacks
-            for fn in callbacks():
+            for fn in callbacks:
                 fn()
         end_critical_section(channel, msg="do poll")
         time.sleep(TEN_MILLISECONDS_IN_SECONDS)

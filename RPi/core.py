@@ -202,7 +202,11 @@ class _Line:
         self.mode = _line_mode_none
 
     def mode_request(self, mode, flags):
-        ret = self.line.request(consumer=line_get_unique_name(self.channel), type=mode, flags=flags)
+        config = gpiod.line_request()
+        config.consumer     = line_get_unique_name(self.channel)
+        config.request_type = mode
+        config.flags        = flags
+        ret = self.line.request(config)
         if ret is None:
             self.mode = mode
         return ret

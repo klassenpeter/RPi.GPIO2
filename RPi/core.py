@@ -11,6 +11,7 @@ import sys
 import time
 from threading import Thread, Event, Lock
 import atexit
+from datetime import timedelta
 
 # BCM to Board mode conversion table for Raspbery Pi 3 Model B
 pin_to_gpio_rev3 = [
@@ -612,8 +613,11 @@ def line_event_wait_lock(channel, bouncetime, timeout):
 # requires lock
 def line_event_wait(channel, bouncetime, timeout):
     # Split up timeout into appropriate parts
-    timeout_sec     = int(int(timeout) / 1000)
-    timeout_nsec    = (int(timeout) % 1000) * 1000
+    # if given in milliseconds
+    timeout_sec  = int(int(timeout) / 1000)
+    timeout_usec =    (int(timeout) % 1000) * 1000
+
+    t_delta_timeout = timedelta(seconds=timeout_sec, microseconds=timeout_usec)
 
     ret = None
 
@@ -622,7 +626,7 @@ def line_event_wait(channel, bouncetime, timeout):
     if bouncetime and _State.lines[channel].timestamp and \
             time.time() - _State.lines[channel].timestamp < bouncetime:
         pass
-    elif _State.lines[channel].line.event_wait(sec=timeout_sec, nsec=timeout_nsec):
+    elif _State.lines[channel].line.event_wait(t_delta_timeout):
         _State.lines[channel].timestamp = time.time()
         if channel not in _State.event_ls:
             # Ensure no double appends. FIXME: should this be done outside of a poll thread?

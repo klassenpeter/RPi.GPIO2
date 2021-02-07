@@ -393,7 +393,7 @@ def chip_init():
 
 
 def chip_close():
-    _State.chip.close()
+    # _State.chip.close()
     _State.chip = None
 
 
